@@ -56,10 +56,44 @@ exports.smash_test_get = async (req, res, next) => {
   const world_cities = db.collection('world-cities');//.doc('world-cities');
 
   const doc = await world_cities.get();
-  if (!doc.exists) {
+
+  var data = doc.docs.map(doc => doc.data());
+
+  return res.status(200).send({
+    success: true,
+    data
+  });
+
+  /*if (!data.exists) {
     return res.status(200).send({
       success: false,
-      data: doc.data()
+      data
+    });
+  } else {
+    console.log('Document data:', doc.data());
+    return res.status(200).send({
+      success: true,
+      data
+    });
+  }
+
+*/
+
+
+};
+
+exports.smash_test_get_country = async (req, res, next) => {
+
+var country = req.params.country; 
+  const world_cities = db.collection('world-cities').doc(country);
+
+  const doc = await world_cities.get();
+
+
+  if (!doc.exists) {
+    return res.status(200).send({
+      success: true,
+      data: []
     });
   } else {
     console.log('Document data:', doc.data());
@@ -69,37 +103,6 @@ exports.smash_test_get = async (req, res, next) => {
     });
   }
 
-
-
-
-};
-
-exports.smash_test_get_country = async (req, res, next) => {
-
-
-
-  const world_cities = db.collection('world-cities');//.doc('world-cities');
-  const doc = await world_cities.get();
-
-
-
-
-  if (!doc.exists) {
-    return res.status(200).send({
-      success: false,
-      data: doc.id
-    });
-  } else {
-
-    doc.forEach(element => {
-      console.log('Element ' + element)
-    });
-
-    return res.status(200).send({
-      success: true,
-      data: doc.id
-    });
-  }
 
 
 
