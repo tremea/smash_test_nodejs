@@ -9,6 +9,7 @@
   "author": "Tremea",
   "license": "ISC",
   "dependencies": {
+    "@firebase/firestore": "^3.5.0",
     "@google-cloud/firestore": "^6.2.0",
     "body-parser": "^1.20.0",
     "csv-parse": "^5.3.0",
